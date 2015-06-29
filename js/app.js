@@ -48,16 +48,20 @@ Player.prototype.render = function() {
 }
 Player.prototype.handleInput = function(keyCode) {
     if (keyCode == 'left') {
-        this.x -= 15;
+        if (this.x == -8) {} 
+            else {this.x -= 15;}
     }
     if (keyCode == 'right') {
-        this.x += 15;
+        if (this.x == 412) {}
+            else {this.x += 15;}
     }
     if (keyCode == 'up') {
-        this.y -= 15;
+        if (this.y == 23) {}
+            else {this.y -= 15;}
     }
     if (keyCode == 'down') {
-        this.y += 15;
+        if (this.y == 398) {}
+            else {this.y += 15;}
     }     // left arrow
         
 }
@@ -67,6 +71,7 @@ Player.prototype.handleInput = function(keyCode) {
 var allEnemies = [new Enemy(1), new Enemy(2), new Enemy(3)];
 // Place the player object in a variable called player
 var player = new Player();
+
 
 
 // This listens for key presses and sends the keys to your
