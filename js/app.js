@@ -3,7 +3,7 @@ var Enemy = function(num) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = -100;
-    this.speedMod = Math.random();
+    this.speedMod = Math.floor((Math.random() * 4));
     this.y = -20 + (num * 83);
 
     // The image/sprite for our enemies, this uses
@@ -22,7 +22,7 @@ Enemy.prototype.update = function(dt) {
     this.x += (dt * 100 + this.speedMod);
     if (this.x > 615) {
         this.x = -100;
-        this.speedMod = Math.floor((Math.random() * 4) + 1);
+        this.speedMod = Math.floor((Math.random() * 4));
     }
 
 }
@@ -66,13 +66,26 @@ Player.prototype.handleInput = function(keyCode) {
         
 }
 
+var Gem = function() {
+    this.x = Math.floor(Math.random() * 421) - 8;
+    this.y = Math.floor(Math.random() * (233 - 68 + 1)) + 68;
+
+    this.sprite = 'images/Gem Blue.png';
+}
+
+Gem.prototype.update = function() {}
+
+Gem.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [new Enemy(1), new Enemy(2), new Enemy(3)];
 // Place the player object in a variable called player
 var player = new Player();
 
-
+var gem = new Gem();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

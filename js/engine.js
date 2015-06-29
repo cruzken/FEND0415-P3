@@ -102,11 +102,20 @@ var Engine = (function(global) {
             if (player.x < allEnemies[enemy].x + 50 &&
                 player.x + 50 > allEnemies[enemy].x &&
                 player.y < allEnemies[enemy].y + 35 &&
-                player.y + 45 > allEnemies[enemy].y ) {
+                player.y + 50 > allEnemies[enemy].y ) {
                 console.log("Player is hit");
                 player.x = 202;
                 player.y = 398;
             }
+        }
+
+        if (player.x < gem.x + 50 &&
+            player.x + 50 > gem.x &&
+            player.y < gem.y + 35 &&
+            player.y + 50 > gem.y ) {
+            gem.x = Math.floor(Math.random() * 421) - 8;
+            gem.y = Math.floor(Math.random() * (233 - 68 + 1)) + 68;
+            gem = new Gem();
         }
     }
 
@@ -161,11 +170,14 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
+        gem.render();
+
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
 
         player.render();
+
     }
 
     /* This function does nothing but it could have been a good place to
@@ -185,7 +197,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/Gem Blue.png'
     ]);
     Resources.onReady(init);
 
