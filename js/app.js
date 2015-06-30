@@ -38,6 +38,7 @@ Enemy.prototype.render = function() {
 var Player = function() {
     this.x = 202;
     this.y = 398;
+    this.score = 0;
 
     this.sprite = 'images/char-boy.png';
 };
@@ -56,8 +57,7 @@ Player.prototype.handleInput = function(keyCode) {
             else {this.x += 15;}
     }
     if (keyCode == 'up') {
-        if (this.y == 23) {}
-            else {this.y -= 15;}
+        this.y -= 15;
     }
     if (keyCode == 'down') {
         if (this.y == 398) {}
