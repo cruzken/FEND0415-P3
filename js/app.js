@@ -9,8 +9,6 @@ var Enemy = function(num) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-
-
 }
 
 // Update the enemy's position, required method for game
@@ -36,12 +34,15 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function() {
-    this.x = 202;
-    this.y = 398;
     this.score = 0;
 
     this.sprite = 'images/char-boy.png';
 };
+
+Player.prototype.spawn = function() {
+    this.x = 202;
+    this.y = 398;
+}
 
 Player.prototype.update = function() {}
 Player.prototype.render = function() {
@@ -62,15 +63,17 @@ Player.prototype.handleInput = function(keyCode) {
     if (keyCode == 'down') {
         if (this.y == 398) {}
             else {this.y += 15;}
-    }     // left arrow
-        
+    }
+   
 }
 
 var Gem = function() {
-    this.x = Math.floor(Math.random() * 421) - 8;
-    this.y = Math.floor(Math.random() * (233 - 68 + 1)) + 68;
-
     this.sprite = 'images/Gem Blue.png';
+}
+
+Gem.prototype.spawn = function() {
+    this.x = Math.floor(Math.random() * 421) - 8;
+    this.y = Math.floor(Math.random() * 166) + 68;
 }
 
 Gem.prototype.update = function() {}
@@ -84,8 +87,10 @@ Gem.prototype.render = function() {
 var allEnemies = [new Enemy(1), new Enemy(2), new Enemy(3)];
 // Place the player object in a variable called player
 var player = new Player();
+player.spawn();
 
 var gem = new Gem();
+gem.spawn();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
