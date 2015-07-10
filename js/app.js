@@ -2,8 +2,6 @@
 var Enemy = function(num) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-    this.x = -100;
-    this.speedMod = Math.floor((Math.random() * 4));
     this.y = -20 + (num * 83);
 
     // The image/sprite for our enemies, this uses
@@ -19,10 +17,13 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x += (dt * 100 + this.speedMod);
     if (this.x > 615) {
-        this.x = -100;
-        this.speedMod = Math.floor((Math.random() * 4));
+        this.spawn();
     }
+}
 
+Enemy.prototype.spawn = function() {
+    this.x = -100;
+    this.speedMod = Math.floor((Math.random() * 4));
 }
 
 // Draw the enemy on the screen, required method for game
@@ -85,6 +86,9 @@ Gem.prototype.render = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [new Enemy(1), new Enemy(2), new Enemy(3)];
+for (var i = 0; i < allEnemies.length; i++) {
+    allEnemies[i].spawn();
+}
 // Place the player object in a variable called player
 var player = new Player();
 player.spawn();
