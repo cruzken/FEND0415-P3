@@ -15,7 +15,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x += (dt * 100 + this.speedMod);
+    this.x += (dt * 100 + this.speedModifier);
     if (this.x > 615) {
         this.spawn();
     }
@@ -23,7 +23,7 @@ Enemy.prototype.update = function(dt) {
 
 Enemy.prototype.spawn = function() {
     this.x = -100;
-    this.speedMod = Math.floor((Math.random() * 4));
+    this.speedModifier = Math.floor((Math.random() * 4));
 }
 
 // Draw the enemy on the screen, required method for game

@@ -98,11 +98,19 @@ var Engine = (function(global) {
     }
 
     function checkCollisions() {
-        for (var enemy in allEnemies) {
-            if (player.x < allEnemies[enemy].x + 50 &&
-                player.x + 50 > allEnemies[enemy].x &&
-                player.y < allEnemies[enemy].y + 40 &&
-                player.y + 56 > allEnemies[enemy].y ) {
+        function theyCollide(subject, target) {
+            if (subject.x < target.x + 50 &&
+                subject.x + 50 > target.x &&
+                subject.y < target.y + 40 &&
+                subject.y + 56 > target.y ) {
+                return true;
+                } else {
+                return false;
+            }
+        }
+        
+        for (var enemy = 0; enemy < allEnemies.length; enemy++) {
+            if (theyCollide(player, allEnemies[enemy])) {
                 console.log("Player is hit!");
                 player.spawn();
                 player.score = 0;
@@ -110,10 +118,7 @@ var Engine = (function(global) {
             }
         }
 
-        if (player.x < gem.x + 50 &&
-            player.x + 50 > gem.x &&
-            player.y < gem.y + 35 &&
-            player.y + 50 > gem.y ) {
+        if (theyCollide(player, gem)) {
             player.score += 10;
             console.log("Score: " + player.score);
             gem.spawn();
