@@ -95,9 +95,13 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+        gem.update();
     }
 
+    // Checks if player hits something
     function checkCollisions() {
+
+        // Tests if two objects are in contact if each other
         function theyCollide(subject, target) {
             if (subject.x < target.x + 50 &&
                 subject.x + 50 > target.x &&
@@ -108,7 +112,8 @@ var Engine = (function(global) {
                 return false;
             }
         }
-        
+
+        //  If player touches any enemy, score and position is reset
         for (var enemy = 0; enemy < allEnemies.length; enemy++) {
             if (theyCollide(player, allEnemies[enemy])) {
                 console.log("Player is hit!");
@@ -118,12 +123,15 @@ var Engine = (function(global) {
             }
         }
 
+        // If player touches gem, gain 10 points and move the gem
         if (theyCollide(player, gem)) {
             player.score += 10;
             console.log("Score: " + player.score);
             gem.spawn();
         }
 
+        // Game ends if player hits the water.
+        // Alerts the total score and resets the game.
         if (player.y < 0) {
             alert("Game Over! Score: " + player.score);
             player.spawn();
